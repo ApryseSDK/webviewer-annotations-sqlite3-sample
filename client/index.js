@@ -1,15 +1,12 @@
+
 var viewerElement = document.getElementById('viewer');
-var viewer = new PDFTron.WebViewer({
-  path: 'lib',
-  initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
-}, viewerElement);
-var viewerInstance = null;
-var annotManager = null;
 var DOCUMENT_ID = 'webviewer-demo-1';
 
-viewerElement.addEventListener('ready', function() {
-  viewerInstance = viewer.getInstance();
-  annotManager = viewerInstance.docViewer.getAnnotationManager();
+WebViewer({
+path: 'lib',
+initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
+}, viewerElement).then(instance => {
+  var annotManager = instance.docViewer.getAnnotationManager();
 
   // Save when annotation change event is triggered (adding, modifying or deleting of annotations)
   annotManager.on('annotationChanged', function(e, annots) {
@@ -40,7 +37,7 @@ var savexfdfString = function(documentId, annotationId, xfdfString) {
     fetch(`/server/annotationHandler.js?documentId=${documentId}`, {
       method: 'POST',
       body: JSON.stringify({
-        annotationId, 
+        annotationId,
         xfdfString
       })
     }).then(function(res) {
