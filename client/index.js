@@ -6,7 +6,8 @@ WebViewer({
 path: 'lib',
 initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
 }, viewerElement).then(instance => {
-  var annotManager = instance.docViewer.getAnnotationManager();
+  var docViewer = instance.docViewer;
+  var annotManager = docViewer.getAnnotationManager();
 
   // Save when annotation change event is triggered (adding, modifying or deleting of annotations)
   annotManager.on('annotationChanged', function(e, annots) {
@@ -19,14 +20,14 @@ initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
       savexfdfString(DOCUMENT_ID, annot.Id, xfdfStrings);
     });
   });
-});
 
-// Load annotations when document is loaded
-viewerElement.addEventListener('documentLoaded', function() {
-  loadxfdfStrings(DOCUMENT_ID).then(function(rows) {
-    JSON.parse(rows).forEach(col => {
-      const annotations = annotManager.importAnnotCommand(col.xfdfString);
-      annotManager.drawAnnotationsFromList(annotations);
+  // Load annotations when document is loaded
+  docViewer.on('documentLoaded', function() {
+    loadxfdfStrings(DOCUMENT_ID).then(function(rows) {
+      JSON.parse(rows).forEach(col => {
+        const annotations = annotManager.importAnnotCommand(col.xfdfString);
+        annotManager.drawAnnotationsFromList(annotations);
+      });
     });
   });
 });
