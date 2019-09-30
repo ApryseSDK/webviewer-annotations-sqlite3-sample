@@ -10,10 +10,10 @@ initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
   var annotManager = docViewer.getAnnotationManager();
 
   // Save when annotation change event is triggered (adding, modifying or deleting of annotations)
-  annotManager.on('annotationChanged', function(e, annots) {
+  annotManager.on('annotationChanged', function(annots, action, options) {
     // If the event is triggered by importing then it can be ignored
     // This will happen when importing the initial annotations from the server or individual changes from other users
-    if (e.imported) return;
+    if (options.imported) return;
 
     const xfdfStrings = annotManager.getAnnotCommand();
     annots.forEach(function(annot) {
