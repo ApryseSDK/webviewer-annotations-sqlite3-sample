@@ -3,8 +3,8 @@ var viewerElement = document.getElementById('viewer');
 var DOCUMENT_ID = 'webviewer-demo-1';
 
 WebViewer({
-path: 'lib',
-initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
+  path: 'lib',
+  initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
 }, viewerElement).then(instance => {
   var docViewer = instance.docViewer;
   var annotManager = docViewer.getAnnotationManager();
