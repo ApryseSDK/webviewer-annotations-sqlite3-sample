@@ -28,7 +28,7 @@ initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
       JSON.parse(rows).forEach(col => {
           annotManager.importAnnotCommand(col.xfdfString).then(function(annotations) {
           annotManager.drawAnnotationsFromList(annotations);
-		    });
+        });
       });
     });
   });
