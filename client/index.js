@@ -26,7 +26,7 @@ initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
   docViewer.on('documentLoaded', function() {
     loadxfdfStrings(DOCUMENT_ID).then(function(rows) {
       JSON.parse(rows).forEach(col => {
-          annotManager.importAnnotCommand(col.xfdfString).then(function(annotations) {
+        annotManager.importAnnotCommand(col.xfdfString).then(function(annotations) {
           annotManager.drawAnnotationsFromList(annotations);
         });
       });
