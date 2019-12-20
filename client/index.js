@@ -15,18 +15,20 @@ initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
     // This will happen when importing the initial annotations from the server or individual changes from other users
     if (options.imported) return;
 
-    const xfdfStrings = annotManager.getAnnotCommand();
-    annots.forEach(function(annot) {
-      savexfdfString(DOCUMENT_ID, annot.Id, xfdfStrings);
-    });
+	annotManager.getAnnotCommand().then(function (xfdfStrings) {
+		annots.forEach(function(annot) {
+			savexfdfString(DOCUMENT_ID, annot.Id, xfdfStrings);
+		});
+	});
   });
 
   // Load annotations when document is loaded
   docViewer.on('documentLoaded', function() {
     loadxfdfStrings(DOCUMENT_ID).then(function(rows) {
       JSON.parse(rows).forEach(col => {
-        const annotations = annotManager.importAnnotCommand(col.xfdfString);
-        annotManager.drawAnnotationsFromList(annotations);
+        annotManager.importAnnotCommand(col.xfdfString).then(function(annotations) {
+			annotManager.drawAnnotationsFromList(annotations);
+		});
       });
     });
   });
