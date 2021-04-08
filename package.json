@@ -10,7 +10,7 @@
   },
   "author": "PDFTron Systems Inc.",
   "devDependencies": {
-    "@pdftron/webviewer-downloader": "^1.0.7",
+    "@pdftron/webviewer-downloader": "^1.4.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "opn": "^5.4.0",
