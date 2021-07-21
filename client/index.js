@@ -14,7 +14,7 @@ WebViewer({
   var annotManager = docViewer.getAnnotationManager();
 
   // Save when annotation change event is triggered (adding, modifying or deleting of annotations)
-  annotManager.on('annotationChanged', function(annots, action, options) {
+  annotManager.addEventListener('annotationChanged', function(annots, action, options) {
     // If the event is triggered by importing then it can be ignored
     // This will happen when importing the initial annotations from the server or individual changes from other users
     if (options.imported) return;
