@@ -2,7 +2,7 @@
 var viewerElement = document.getElementById('viewer');
 var DOCUMENT_ID = 'webviewer-demo-1';
 
-WebViewer({
+WebViewer.Iframe({
   path: 'lib',
   initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/demo.pdf',
   documentXFDFRetriever: async () => {
@@ -10,7 +10,7 @@ WebViewer({
     return JSON.parse(rows).map(row => row.xfdfString);
   }
 }, viewerElement).then(instance => {
-  var docViewer = instance.docViewer;
+  var docViewer = instance.Core.documentViewer;
   var annotManager = docViewer.getAnnotationManager();
 
   // Save when annotation change event is triggered (adding, modifying or deleting of annotations)
@@ -19,7 +19,7 @@ WebViewer({
     // This will happen when importing the initial annotations from the server or individual changes from other users
     if (options.imported) return;
 
-    annotManager.exportAnnotCommand().then(function (xfdfStrings) {
+    annotManager.exportAnnotationCommand().then(function (xfdfStrings) {
       annots.forEach(function(annot) {
         savexfdfString(DOCUMENT_ID, annot.Id, xfdfStrings);
       });
