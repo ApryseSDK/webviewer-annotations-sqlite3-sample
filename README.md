@@ -8,7 +8,7 @@ This is a WebViewer sample to show how you can save and load annotations through
 
 ## Initial setup
 
-Before you begin, make sure your development environment includes [Node.js](https://nodejs.org/en/).
+Before you begin, make sure your development environment includes [Node.js](https://nodejs.org/en/). This sample requires version 13 of Node.js.
 
 ## Install
 
